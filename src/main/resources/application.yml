@@ -1,0 +1,24 @@
+server:
+  port: ${SERVER_PORT:8761}
+
+spring:
+  application:
+    name: service-registry
+
+eureka:
+  client:
+    # The registry itself does not need to register with or fetch from another registry
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    hostname: ${EUREKA_HOSTNAME:localhost}
+  server:
+    # Turn this off in local/dev so services show as DOWN quickly when stopped.
+    # In production with multiple zones you may want this on - see README.
+    enable-self-preservation: ${EUREKA_SELF_PRESERVATION:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
